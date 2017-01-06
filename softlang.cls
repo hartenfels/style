@@ -84,11 +84,8 @@
 \RequirePackage[T1]{fontenc}                          % Silbentrennung auch bei Worten mit Umlauten
 \RequirePackage[utf8]{inputenc}                       % Unterstuetzung von Umlauten und Sonderzeichen
 \RequirePackage{csquotes}
-\RequirePackage{graphicx}                             % fuer Einbindung von Grafiken
+\RequirePackage{graphicx}
 \RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-\RequirePackage{amsmath}
-\RequirePackage{color}                                % Unterstuetzung für Farben
 \RequirePackage{setspace}                             % Zeilenabstand Ändern
 \RequirePackage{fancyhdr}                             % Schicke Kopfzeilen
 \RequirePackage[colorlinks=true,linkcolor=black,citecolor=black,pdfpagemode=UseNone,urlcolor=blue,pdfstartview=FitH,pdfhighlight={/P}]{hyperref}
