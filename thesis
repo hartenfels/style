@@ -77,7 +77,7 @@ done
 
 if [ -e content/appendix.tex ]; then
     echo '\appendix'
-    echo '\input{content/appendix}'
+    echo '\include{content/appendix}'
 fi
 
 echo '
