@@ -60,15 +60,13 @@
 \DeclareOption{m}{\setboolean{@isFemale}{false}}
 \DeclareOption{times}{\setboolean{@isTimes}{true}}
 \DeclareOption{palatino}{\setboolean{@isPalatino}{true}}
-\DeclareOption{twoside}{\PassOptionsToClass{twoside,openright}{book}}
-\DeclareOption{oneside}{\PassOptionsToClass{oneside}{book}}
 \DeclareOption{extern}{\setboolean{@isExtern}{true}}
-\DeclareOption{10pt}{\PassOptionsToClass{10pt}{book}}
-\DeclareOption{11pt}{\PassOptionsToClass{11pt}{book}}
-\DeclareOption{12pt}{\PassOptionsToClass{12pt}{book}}
 \DeclareOption{single}{\setboolean{@isSingle}{true}}
 \DeclareOption{onehalf}{\setboolean{@isOneHalf}{true}}
 \DeclareOption{double}{\setboolean{@isDouble}{true}}
+
+\setboolean{@isPalatino}{true}
+\setboolean{@isSingle}{true}
 
 %--- Execution of options ------------------------------------------------------
 
@@ -76,23 +74,24 @@
 
 %--- Package loading -----------------------------------------------------------
 
-\LoadClass[a4paper,titlepage]{book}
-\RequirePackage[ngerman,english]{babel}                       % Unterstuetzung neue deutsche Rechtschreibung
-\RequirePackage{csquotes}
+\ifthenelse{\not\boolean{@isEXPBA}\and\not\boolean{@isEXPMA}}{
+    \LoadClass[12pt,a4paper,titlepage]{book}
+}{
+    \LoadClass[12pt,a4paper,titlepage]{article}
+}
+
+\RequirePackage[english]{babel}
 \RequirePackage[T1]{fontenc}                          % Silbentrennung auch bei Worten mit Umlauten
 \RequirePackage[utf8]{inputenc}                       % Unterstuetzung von Umlauten und Sonderzeichen
-\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}  % Silbentrennung bei unbekannten zusammengesetzten Worten
+\RequirePackage{csquotes}
 \RequirePackage{graphicx}                             % fuer Einbindung von Grafiken
-\RequirePackage{graphics}                             % fuer Einbindung von Grafiken
-\RequirePackage{tabularx}                             % flexible Gestaltung von Tabellen
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{color}                                % Unterstuetzung für Farben
 \RequirePackage{setspace}                             % Zeilenabstand Ändern
 \RequirePackage{fancyhdr}                             % Schicke Kopfzeilen
-\RequirePackage[colorlinks=true,linkcolor=black, citecolor = black,pdfpagemode = none,urlcolor=blue,pdfstartview=FitH,pdfhighlight={/P}]{hyperref}
-% \RequirePackage{bibgerm}
+\RequirePackage[colorlinks=true,linkcolor=black,citecolor=black,pdfpagemode=UseNone,urlcolor=blue,pdfstartview=FitH,pdfhighlight={/P}]{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Default: Computer Modern (TeX-Standard)
@@ -141,6 +140,15 @@
 \def\@drittgutachterInfo{}
 \newcommand{\drittgutachterInfo}[1]{\def\@drittgutachterInfo{#1}}
 
+\newboolean{@gimmetableofcontents}
+\newcommand{\gimmetableofcontents}{\setboolean{@gimmetableofcontents}{true}}
+\newboolean{@gimmelistoffigures}
+\newcommand{\gimmelistoffigures}{\setboolean{@gimmelistoffigures}{true}}
+\newboolean{@gimmelistoftables}
+\newcommand{\gimmelistoftables}{\setboolean{@gimmelistoftables}{true}}
+\newboolean{@gimmelistoflistings}
+\newcommand{\gimmelistoflistings}{\setboolean{@gimmelistoflistings}{true}}
+
 \newcommand{\abgabe}{%
   \ifcase\month\or Januar\or Februar\or M{\"a}rz\or April\or Mai\or Juni\or
   Juli\or August\or September\or Oktober\or November\or Dezember \fi\
@@ -164,12 +172,12 @@
 % \setlength{\hoffset}{+.25in}
  \begin{titlepage}
     % Logo Uni
-		\noindent\includegraphics[height=1.2cm]{logos/UniLogo}
-		\hfill
-		%\includegraphics[height=1.2cm]{logos/IwviLogo}\\
-		%\hspace*{1.867cm}Fachbereich 4: Informatik%
+        \noindent\includegraphics[height=1.2cm]{logos/UniLogo}
+        \hfill
+        %\includegraphics[height=1.2cm]{logos/IwviLogo}\\
+        %\hspace*{1.867cm}Fachbereich 4: Informatik%
 
-		\normalsize \vspace*{1.5cm}
+        \normalsize \vspace*{1.5cm}
 
     \begin{center}
       \doublespacing
@@ -179,10 +187,10 @@
       \ifthenelse{\boolean{@isScr}}{
         \huge Skript\\[.2cm]}
 
-			\ifthenelse{\boolean{@isSem}}{
+            \ifthenelse{\boolean{@isSem}}{
         \huge Seminararbeit\\[.2cm]}
 
-			\ifthenelse{\boolean{@isProSem}}{
+            \ifthenelse{\boolean{@isProSem}}{
         \huge Proseminararbeit\\[.2cm]}
 
       \ifthenelse{\boolean{@isSA}}{
@@ -225,7 +233,7 @@
       \normalsize {
 
       \ifthenelse{\boolean{@isScr}}{
-        	\begin{tabularx}{\linewidth}{l X}
+            \begin{tabularx}{\linewidth}{l X}
             Dozent  :     & \@dozent \\
                           & \@dozentInfo \\[.2cm]
           \end{tabularx}\\[2cm]}{
@@ -237,27 +245,27 @@
                           & \@erstgutachterInfo \\[.2cm]
                           & \@zweitgutachter \\
                           & \@zweitgutachterInfo \\[.2cm]
-			\ifthenelse{\NOT\equal{\@drittgutachter}{}}{
-						  & \@drittgutachter \\
+            \ifthenelse{\NOT\equal{\@drittgutachter}{}}{
+                          & \@drittgutachter \\
                           & \@drittgutachterInfo \\[.2cm]}{}
           \end{tabularx}\\[2cm]}{%
 
           % \begin{tabularx}{\linewidth}{r  X}
           \begin{tabularx}{1.05\textwidth}{r X} %{ >{\hsize=.24\hsize}X >{\hsize=0.76\hsize}X}
             \ifthenelse{\equal{\@zweitgutachter}{}}{
-            Gutachter:			& \@erstgutachter \\
-								& \@erstgutachterInfo \\}{
+            Gutachter:            & \@erstgutachter \\
+                                & \@erstgutachterInfo \\}{
             \ifthenelse{\boolean{@isEXPBA}\or\boolean{@isEXPMA}}{
             Matrikelnummer:   & \@matnr \\[.2cm]
             }{}
-            Erstgutachter:  	& \@erstgutachter \\
-								& \@erstgutachterInfo \\[.2cm]
-            Zweitgutachter: 	& \@zweitgutachter \\
-								& \@zweitgutachterInfo \\[.2cm]
-			\ifthenelse{\NOT\equal{\@drittgutachter}{}}{
-            Betreuer:			& \@drittgutachter \\
-								& \@drittgutachterInfo \\[.2cm]}{}
-			}
+            Erstgutachter:      & \@erstgutachter \\
+                                & \@erstgutachterInfo \\[.2cm]
+            Zweitgutachter:     & \@zweitgutachter \\
+                                & \@zweitgutachterInfo \\[.2cm]
+            \ifthenelse{\NOT\equal{\@drittgutachter}{}}{
+            Betreuer:            & \@drittgutachter \\
+                                & \@drittgutachterInfo \\[.2cm]}{}
+            }
           \end{tabularx}\\[2cm]}}
       }
       \normalsize \hspace*{.12cm} Koblenz, im \abgabe
@@ -271,41 +279,41 @@
 
     \cleardoublepage
 
-		\ifthenelse{\boolean{@isBA}\or\boolean{@isMA}\or\boolean{@isDA}}{
+        \ifthenelse{\boolean{@isBA}\or\boolean{@isMA}\or\boolean{@isDA}}{
 
-			\huge
-			\textbf{Erklärung}
-			\normalsize
-		    \newline\newline\newline\newline\newline\newline
-  		  \thispagestyle{empty}
-	    	\noindent
-    		Hiermit bestätige ich, dass die vorliegende Arbeit von mir selbständig verfasst wurde und ich
-			keine anderen als die angegebenen Hilfsmittel – insbesondere keine im Quellenverzeichnis
-			nicht benannten Internet–Quellen – benutzt habe und die Arbeit von mir vorher nicht in einem
-			anderen Prüfungsverfahren eingereicht wurde. Die eingereichte schriftliche Fassung
-			entspricht der auf dem elektronischen Speichermedium (CD-Rom).\\
-    		\vspace*{2ex}
+            \huge
+            \textbf{Erklärung}
+            \normalsize
+            \newline\newline\newline\newline\newline\newline
+            \thispagestyle{empty}
+            \noindent
+            Hiermit bestätige ich, dass die vorliegende Arbeit von mir selbständig verfasst wurde und ich
+            keine anderen als die angegebenen Hilfsmittel – insbesondere keine im Quellenverzeichnis
+            nicht benannten Internet–Quellen – benutzt habe und die Arbeit von mir vorher nicht in einem
+            anderen Prüfungsverfahren eingereicht wurde. Die eingereichte schriftliche Fassung
+            entspricht der auf dem elektronischen Speichermedium (CD-Rom).\\
+            \vspace*{2ex}
 
-    		\begin{flushleft}
-      		\begin{tabularx}{\linewidth}{X c c}
+            \begin{flushleft}
+              \begin{tabularx}{\linewidth}{X c c}
 
-        	{} & Ja & Nein \\
-        	{} & {} & {} \\
-        	Mit der Einstellung der Arbeit in die Bibliothek bin ich einverstanden. & $\square$ & $\square$ \\
-        	{} & {} & {} \\
-        	Der Veröffentlichung dieser Arbeit im Internet stimme ich zu. &
-        	$\square$ & $\square$
+            {} & Ja & Nein \\
+            {} & {} & {} \\
+            Mit der Einstellung der Arbeit in die Bibliothek bin ich einverstanden. & $\square$ & $\square$ \\
+            {} & {} & {} \\
+            Der Veröffentlichung dieser Arbeit im Internet stimme ich zu. &
+            $\square$ & $\square$
 
-      		\end{tabularx}
-    		\end{flushleft}
-    		\vspace*{3cm}
+              \end{tabularx}
+            \end{flushleft}
+            \vspace*{3cm}
 
 
-    		\small
-    		\noindent
-    		\dotfill \\
-    		{\small(Ort, Datum)}\hfill{\small (\@author)}
-		}{}% Unterschiedliche Zeilenabstaende
+            \small
+            \noindent
+            \dotfill \\
+            {\small(Ort, Datum)}\hfill{\small (\@author)}
+        }{}% Unterschiedliche Zeilenabstaende
 
 \ifthenelse{\boolean{@isSingle}} {
     \singlespacing

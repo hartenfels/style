@@ -1,0 +1,89 @@
+#!/bin/sh
+echo '\input{config}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\setlength{\headheight}{15pt}
+
+\makeatletter
+
+\hypersetup{
+    pdftitle    = {\@title},
+    pdfauthor   = {\@author},
+    colorlinks  = true,
+    unicode     = true,
+    linkcolor   = black,
+    citecolor   = black,
+    filecolor   = black,
+    urlcolor    = blue,
+}
+
+\makeatother
+
+\clubpenalty         = 10000
+\widowpenalty        = 10000
+\displaywidowpenalty = 10000
+
+
+\begin{document}
+
+\pagenumbering{Alph}
+\pagestyle{empty}
+
+\maketitle
+\cleardoublepage
+'
+
+if [ -e content/abstract.tex ]; then
+    echo '\input{content/abstract}'
+fi
+
+echo '
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+
+\pagenumbering{roman}
+
+\ifthenelse{\boolean{@gimmetableofcontents}}{
+    \tableofcontents
+    \cleardoublepage
+}
+
+\ifthenelse{\boolean{@gimmelistoffigures}}{
+    \listoffigures
+    \cleardoublepage
+}
+
+\ifthenelse{\boolean{@gimmelistoftables}}{
+    \listoftables
+    \cleardoublepage
+}
+
+\ifthenelse{\boolean{@gimmelistoflistings}}{
+    \listoflistings
+    \cleardoublepage
+}
+
+\pagenumbering{arabic}
+'
+
+for tex in `ls content/*.tex | sort`; do
+    name="$(echo "$tex" | sed 's/^content\///g;s/\.tex$//g')"
+    if [ "$name" != abstract ] && [ "$name" != appendix ]; then
+        echo "\\include{content/$name}"
+    fi
+done
+
+if [ -e content/appendix.tex ]; then
+    echo '\appendix'
+    echo '\input{content/appendix}'
+fi
+
+echo '
+\cleardoublepage
+
+\bibliographystyle{alpha}
+\bibliography{sources}
+
+\end{document}'
