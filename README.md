@@ -1,8 +1,11 @@
 # Softlang Style That Works For Me™
 
 Simplified and cleaned-up version of the official Softlang style. Does what you
-mean, loads less random packages and doesn't require biblatex. Windows and
-German are unsupported.
+mean, loads less random packages, doesn't crash when there's no citations and
+doesn't require biblatex. Windows and German are unsupported.
+
+If you want an example of how this looks, just run `make`.
+
 
 ## Usage
 
