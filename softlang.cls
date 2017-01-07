@@ -75,9 +75,9 @@
 %--- Package loading -----------------------------------------------------------
 
 \ifthenelse{\not\boolean{@isEXPBA}\and\not\boolean{@isEXPMA}}{
-    \LoadClass[12pt,a4paper,titlepage]{book}
+    \LoadClass[12pt,a4paper,titlepage,oneside]{book}
 }{
-    \LoadClass[12pt,a4paper,titlepage]{article}
+    \LoadClass[12pt,a4paper,titlepage,oneside]{article}
 }
 
 \RequirePackage[english]{babel}
