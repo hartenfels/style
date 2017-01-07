@@ -85,6 +85,7 @@
 \RequirePackage[utf8]{inputenc}                       % Unterstuetzung von Umlauten und Sonderzeichen
 \RequirePackage{csquotes}
 \RequirePackage{graphicx}
+\RequirePackage{tabularx}
 \RequirePackage{amsfonts}
 \RequirePackage{setspace}                             % Zeilenabstand Ändern
 \RequirePackage{fancyhdr}                             % Schicke Kopfzeilen
