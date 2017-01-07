@@ -15,5 +15,6 @@ clean:
 
 realclean: clean
 	rm -f thesis.tex thesis.pdf
+	find -name '*-eps-converted-to.pdf' -exec rm '{}' ';'
 
 .PHONY: clean realclean
