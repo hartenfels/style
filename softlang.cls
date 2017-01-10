@@ -286,10 +286,10 @@
             \thispagestyle{empty}
             \noindent
             Hiermit bestätige ich, dass die vorliegende Arbeit von mir selbständig verfasst wurde und ich
-            keine anderen als die angegebenen Hilfsmittel – insbesondere keine im Quellenverzeichnis
-            nicht benannten Internet–Quellen – benutzt habe und die Arbeit von mir vorher nicht in einem
+            keine anderen als die angegebenen Hilfsmittel -- insbesondere keine im Quellenverzeichnis
+            nicht benannten Internet-Quellen -- benutzt habe und die Arbeitvon mir vorher nicht in einem
             anderen Prüfungsverfahren eingereicht wurde. Die eingereichte schriftliche Fassung
-            entspricht der auf dem elektronischen Speichermedium (CD-Rom).\\
+            entspricht der auf dem elektronischen Speichermedium (CD-ROM).\\
             \vspace*{2ex}
 
             \begin{flushleft}
