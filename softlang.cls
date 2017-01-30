@@ -51,13 +51,12 @@
 \DeclareOption{prosem}{\setboolean{@isProSem}{true}}
 \DeclareOption{pp}{\setboolean{@isPP}{true}}
 \DeclareOption{sa}{\setboolean{@isSA}{true}}
-\DeclareOption{diplom}{\setboolean{@isDA}{true}}
+\DeclareOption{diplomm}{\setboolean{@isDA}{true}\setboolean{@isFemale}{false}}
+\DeclareOption{diplomf}{\setboolean{@isDA}{true}\setboolean{@isFemale}{true}}
 \DeclareOption{msc}{\setboolean{@isMA}{true}}
 \DeclareOption{bsc}{\setboolean{@isBA}{true}}
 \DeclareOption{expba}{\setboolean{@isEXPBA}{true}}
 \DeclareOption{expma}{\setboolean{@isEXPMA}{true}}
-\DeclareOption{w}{\setboolean{@isFemale}{true}}
-\DeclareOption{m}{\setboolean{@isFemale}{false}}
 \DeclareOption{times}{\setboolean{@isTimes}{true}}
 \DeclareOption{palatino}{\setboolean{@isPalatino}{true}}
 \DeclareOption{extern}{\setboolean{@isExtern}{true}}
