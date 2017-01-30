@@ -1,5 +1,17 @@
 #!/bin/sh
+
+# This file generates thesis.tex.
+# Modifications here will get picked up when you run `make`.
+
 echo '\input{config}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   %
+%        AUTO-GENERATED FILE        %
+%                                   %
+% Modifications will be overwritten %
+%                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
