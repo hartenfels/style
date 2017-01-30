@@ -1,0 +1,12 @@
+*.aux
+*.log
+*.lof
+*.lot
+*.lol
+*.out
+*.toc
+*.blg
+*.bbl
+*-eps-converted-to.pdf
+thesis.pdf
+thesis.tex
