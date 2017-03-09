@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This file generates thesis.tex.
 # Modifications here will get picked up when you run `make`.
@@ -89,7 +89,7 @@ for tex in `ls content/*.tex | sort`; do
 done
 
 if [ -e content/appendix.tex ]; then
-    echo '\\appendix'
+    echo 'appendix'
     echo '\include{content/appendix}'
 fi
 
