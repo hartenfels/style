@@ -3,7 +3,8 @@
 # This file generates thesis.tex.
 # Modifications here will get picked up when you run `make`.
 
-echo '\input{config}
+cat <<'EOF'
+\input{config}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   %
@@ -44,13 +45,13 @@ echo '\input{config}
 
 \maketitle
 \cleardoublepage
-'
+EOF
 
 if [ -e content/abstract.tex ]; then
     echo '\input{content/abstract}'
 fi
 
-echo '
+cat <<'EOF'
 \pagestyle{fancy}
 \fancyfoot{}
 \fancyhead[R]{\thepage}
@@ -78,7 +79,7 @@ echo '
 }
 
 \pagenumbering{arabic}
-'
+EOF
 
 for tex in `ls content/*.tex | sort`; do
     name="$(echo "$tex" | sed 's/^content\///g;s/\.tex$//g')"
@@ -88,14 +89,15 @@ for tex in `ls content/*.tex | sort`; do
 done
 
 if [ -e content/appendix.tex ]; then
-    echo '\appendix'
+    echo '\\appendix'
     echo '\include{content/appendix}'
 fi
 
-echo '
+cat <<'EOF'
 \cleardoublepage
 
 \bibliographystyle{alpha}
 \bibliography{sources}
 
-\end{document}'
+\end{document}
+EOF
